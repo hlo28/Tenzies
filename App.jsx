@@ -70,12 +70,15 @@ export default function App() {
   }
 
   function hold(id) {
-    setDice(oldDice =>
-      oldDice.map(die =>
-        die.id === id ? { ...die, isHeld: !die.isHeld } : die
-      )
-    );
-  }
+    if (!hasStarted) {
+        setHasStarted(true);
+    }
+    setDice(oldDice => oldDice.map(die =>
+        die.id === id
+            ? { ...die, isHeld: !die.isHeld }
+            : die
+    ));
+}
 
   const diceElements = dice.map(dieObj => (
     <Die
